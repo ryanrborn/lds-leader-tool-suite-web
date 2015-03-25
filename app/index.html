@@ -1,0 +1,53 @@
+<html lang="en" ng-app="llts">
+	<head>
+		<title ng-controller="TitleController">{{page.title()}}</title>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+
+		<base href="/">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic">
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.css">
+		<link rel="stylesheet" href="./assets/app.css">
+	</head>
+	<body layout="column" ng-controller="MainController">
+		<md-toolbar layout="row">
+			<md-button class="menu" hide-gt-sm ng-click="toggleSidenav('left')" aria-label="Show User List">
+				<md-icon md-svg-icon="menu" ></md-icon>
+			</md-button>
+			<h1 class="md-toolbar-tools" layout-align-gt-sm="center">{{page.title()}}</h1>
+		</md-toolbar>
+		<div layout="row" flex>
+			<md-sidenav md-is-locked-open="$mdMedia('gt-sm')" class="md-whiteframe-z2" md-component-id="left">
+				<md-list>
+					<md-item ng-repeat="it in nav.items()">
+						<md-button ng-click="nav.select(it)" ng-class="{'selected': nav.selected(it)}">
+							<md-icon md-svg-icon="{{it.icon}}" class="avatar"></md-icon>
+							{{it.text}}
+						</md-button>
+					</md-item>
+				</md-list>
+			</md-sidenav>
+			<md-content layout="column" flex class="md-padding" ng-view>
+
+			</md-content>
+		</div>
+		<!-- Angular Material Dependencies -->
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-route.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-resource.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-animate.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-aria.min.js"></script>
+
+		<script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+		<script src="./src/first.js"></script>
+		<script src="./src/page/PageFactory.js"></script>
+		<script src="./src/page/NavFactory.js"></script>
+		<script src="./src/page/TitleController.js"></script>
+		<script src="./src/page/MainController.js"></script>
+		<script src="./src/page/LandingController.js"></script>
+		<script src="./src/page/AboutController.js"></script>
+	</body>
+</html>
