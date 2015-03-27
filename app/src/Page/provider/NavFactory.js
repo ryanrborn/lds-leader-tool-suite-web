@@ -2,19 +2,26 @@ app.factory('Nav', ['$location', function($location){
 	var navigationItems = {
 		"default": [
 			{
-				"icon": "svg-3",
+				"icon": "",
 				"text": "Home",
 				"url": "/"
 			},
 			{
-				"icon": "svg-1",
-				"text": "Login",
-				"url": "/login"
+				"icon": "",
+				"text": "About",
+				"url": "/about"
 			},
 			{
-				"icon": "svg-2",
-				"text": "About Us",
-				"url": "/about"
+				"icon": "",
+				"text": "Register/Sign in",
+				"url": "/sign-in"
+			},
+		],
+		"user": [
+			{
+				"icons": "",
+				"text": "My Organizations",
+				"url": "/organizations"
 			}
 		]
 	};

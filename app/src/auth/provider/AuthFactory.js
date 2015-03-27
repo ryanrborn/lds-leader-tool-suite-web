@@ -1,6 +1,6 @@
 app.factory('Auth', ['$http', '$q', 'llts_config', function($http, $q, llts_config){
 	var user = {};
-	var token = false:
+	var token = false;
 
 	var auth = {
 		login: function(usernamePassword) {

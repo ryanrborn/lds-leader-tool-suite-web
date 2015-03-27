@@ -14,25 +14,23 @@ app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locatio
 		}).when('/about', {
 			templateUrl: './src/page/view/about.html',
 			controller: 'AboutController'
+		}).when('/sign-in', {
+			templateUrl: './src/auth/view/auth.html',
+			controller: 'AuthController'
 		}).otherwise({
 			templateUrl: './src/page/view/404.html',
-			controller: 'ErrorController'
+			controller: 'NotFoundController'
 		});
 
 	$locationProvider.html5Mode(true);
 
 	$mdIconProvider
-		.defaultIconSet("./assets/svg/avatars.svg", 128)
 		.icon("menu"       , "./assets/svg/menu.svg"        , 24)
-		.icon("share"      , "./assets/svg/share.svg"       , 24)
-		.icon("google_plus", "./assets/svg/google_plus.svg" , 512)
-		.icon("hangouts"   , "./assets/svg/hangouts.svg"    , 512)
-		.icon("twitter"    , "./assets/svg/twitter.svg"     , 512)
-		.icon("phone"      , "./assets/svg/phone.svg"       , 512);
+		.icon("share"      , "./assets/svg/share.svg"       , 24);
 
-	$mdThemingProvider.theme('default')
-		.primaryPalette('blue')
-		.accentPalette('red');
+	// $mdThemingProvider.theme('default')
+	// 	.primaryPalette('blue')
+	// 	.accentPalette('red');
 
 	$resourceProvider.defaults.stripTrailingSlashes = false;
 
