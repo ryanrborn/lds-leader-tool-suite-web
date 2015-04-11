@@ -1,0 +1,11 @@
+<div layout="column" class="llts-content">
+	<md-content>
+		<md-list>
+			<md-item class="md-1-line" ng-repeat="org in orgs">
+				<a ng-href="/organizations/{{org.id}}">
+					<h3>{{org.name}}</h3>
+				</a>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</div>

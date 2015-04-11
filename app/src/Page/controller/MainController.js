@@ -5,4 +5,9 @@ app.controller('MainController', ['$scope', '$mdSidenav', 'Page', 'Nav', functio
 	$scope.toggleSidenav = function(which) {
 		$mdSidenav(which).toggle();
 	};
+
+	$scope.select = function(it) {
+		$scope.nav.select(it);
+		$mdSidenav('left').toggle();
+	};
 }]);

@@ -4,7 +4,7 @@
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
 
 		<base href="/">
 
@@ -17,15 +17,15 @@
 			<md-toolbar>
 				<h1 class="md-toolbar-tools">
 					<a ng-href="/" layout="row" flex class="llts-logo">
-						<md-icon md-svg-src="logo"></md-icon>
-						<div class="llts-logotype">LDS Leader Tool Suite</div>
+						<md-icon md-svg-icon="logo" class="logo"></md-icon>
+						<div class="llts-logotype" layout="column" layout-align="center">LDS Leader Tool Suite</div>
 					</a>
 				</h1>
 			</md-toolbar>
 			<md-content flex role="navigation">
 				<md-list>
 					<md-item ng-repeat="it in nav.items()">
-						<md-button ng-click="nav.select(it)" ng-class="{'selected': nav.selected(it)}">
+						<md-button ng-click="select(it)" ng-class="{'selected': nav.selected(it)}">
 							<md-icon md-svg-icon="{{it.icon}}" class=""></md-icon>
 							{{it.text}}
 						</md-button>
@@ -52,10 +52,21 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-route.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-resource.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-messages.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-animate.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-aria.min.js"></script>
-
 		<script src="//ajax.googleapis.com/ajax/libs/angular_material/0.8.3/angular-material.min.js"></script>
+
+		<script src="./src/config/Config.js"></script>
+		<script src="./src/config/Constants.js"></script>
+		<script src="./src/config/Routes.js"></script>
+
+		<script src="./src/auth/Auth.js"></script>
+		<script src="./src/auth/provider/AuthFactory.js"></script>
+		<script src="./src/auth/controller/AuthController.js"></script>
+		<script src="./src/auth/controller/LoginController.js"></script>
+		<script src="./src/auth/controller/RegisterController.js"></script>
+
 		<script src="./src/first.js"></script>
 		<script src="./src/page/provider/PageFactory.js"></script>
 		<script src="./src/page/provider/NavFactory.js"></script>
@@ -64,7 +75,6 @@
 		<script src="./src/page/controller/LandingController.js"></script>
 		<script src="./src/page/controller/AboutController.js"></script>
 		<script src="./src/page/controller/NotFoundController.js"></script>
-		<script src="./src/auth/provider/AuthFactory.js"></script>
-		<script src="./src/auth/controller/AuthController.js"></script>
+		<script src="./src/organization/controller/OrganizationController.js"></script>
 	</body>
 </html>

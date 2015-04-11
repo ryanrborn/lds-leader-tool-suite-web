@@ -8,23 +8,76 @@
 		</md-tab>
 	</md-tabs>
 	<ng-switch on="selectedTab" class="tabpanel-container">
-		<div role="tabpanel" id="signIn-content" aria-labelledby="signIn" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
-			<form ng-submit="login()">
+		<div role="tabpanel" id="signIn-content" aria-labelledby="signIn" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()" ng-controller="LoginController">
+			<form ng-submit="login()" name="loginForm">
 				<md-input-container>
 					<label>Email</label>
-					<input type="email" required name="email" ng-model="email">
+					<input type="text" required name="email" ng-model="userData.email">
+					<div ng-messages="loginForm.email.$error" ng-show="loginForm.email.$dirty">
+						<div ng-message="required">This is required</div>
+					</div>
 				</md-input-container>
 				<md-input-container>
 					<label>Password</label>
-					<input type="password" required name="password" ng-model="password">
+					<input type="password" required name="password" ng-model="userData.password">
+					<div ng-messages="loginForm.password.$error" ng-show="loginForm.password.$dirty">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+				<!-- Implement remember me functionality using localStorage -->
+				<md-input-container>
+					<md-checkbox ng-model="remember" aria-label="Remember me">Remember me</md-checkbox>
 				</md-input-container>
 				<md-input-container layout="row" layout-align="center center">
 					<md-button type="submit" class="md-raised md-primary">Sign in</md-button>
 				</md-input-container>
 			</form>
 		</div>
-		<div role="tabpanel" id="register-content" aria-labelledby="register" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
-			<p>Register</p>
+		<div role="tabpanel" id="register-content" aria-labelledby="register" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()" ng-controller="RegisterController">
+			<form ng-submit="register()" name="registerForm">
+				<md-input-container>
+					<label>First Name</label>
+					<input type="text" required name="first_name" ng-model="userData.first_name">
+					<div ng-messages="registerForm.first_name.$error" ng-show="registerForm.first_name.$dirty">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Last Name</label>
+					<input type="text" required name="last_name" ng-model="userData.last_name">
+					<div ng-messages="registerForm.last_name.$error" ng-show="registerForm.last_name.$dirty">
+						<div ng-message="required">This is required</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Email</label>
+					<input type="email" required name="email" ng-model="userData.email" ng-keyup="checkEmail()">
+					<div ng-messages="registerForm.email.$error" ng-show="registerForm.email.$dirty">
+						<div ng-message="required">This is required</div>
+						<div ng-message="email">Please enter a valid email address</div>
+						<div ng-message="unique">This email is already in use</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Password</label>
+					<input type="password" required name="password" ng-model="userData.password" ng-change="checkMatch()" minlength="8">
+					<div ng-messages="registerForm.password.$error" ng-show="registerForm.password.$dirty">
+						<div ng-message="required">This is required</div>
+						<div ng-message="minlength">Must be at least 8 characters</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Repeat Password</label>
+					<input type="password" required name="passwordV" ng-model="userData.passwordV" ng-change="checkMatch()">
+					<div ng-messages="registerForm.passwordV.$error" ng-show="registerForm.passwordV.$dirty">
+						<div ng-message="required">This is required</div>
+						<div ng-message="mismatch">Passwords must match!</div>
+					</div>
+				</md-input-container>
+				<md-input-container layout="row" layout-align="center center">
+					<md-button type="submit" class="md-raised md-primary">Register</md-button>
+				</md-input-container>
+			</form>
 		</div>
 	</ng-switch>
 </div>

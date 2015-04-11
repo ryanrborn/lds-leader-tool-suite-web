@@ -1,23 +1,14 @@
-var app = angular.module('llts', ['ngMaterial', 'ngRoute', 'ngResource']);
+'use strict';
 
-app.constant("llts_config", {
-	"api_host": "local.llts-backend.com",
-	"protocol": window.location.protocol
-});
+var app = angular.module('llts', ['ngMaterial', 'ngRoute', 'ngResource', 'ngMessages', 'Auth', 'Config']);
 
-app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider){
+app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', '$httpProvider', 'RoutesProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider, $httpProvider, RoutesProvider){
 
-	$routeProvider
-		.when('/', {
-			templateUrl: './src/page/view/landing.html',
-			controller: 'LandingController'
-		}).when('/about', {
-			templateUrl: './src/page/view/about.html',
-			controller: 'AboutController'
-		}).when('/sign-in', {
-			templateUrl: './src/auth/view/auth.html',
-			controller: 'AuthController'
-		}).otherwise({
+	var routes = RoutesProvider.$get().routes();
+	for (var path in routes) {
+		$routeProvider.when(path, routes[path]);
+	}
+	$routeProvider.otherwise({
 			templateUrl: './src/page/view/404.html',
 			controller: 'NotFoundController'
 		});
@@ -25,8 +16,9 @@ app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locatio
 	$locationProvider.html5Mode(true);
 
 	$mdIconProvider
-		.icon("menu"       , "./assets/svg/menu.svg"        , 24)
-		.icon("share"      , "./assets/svg/share.svg"       , 24);
+		.icon("menu"		, "./assets/svg/menu.svg"		, 24)
+		.icon("share"		, "./assets/svg/share.svg"		, 24)
+		.icon("logo"		, "./assets/svg/temple.svg"		, "1052");
 
 	// $mdThemingProvider.theme('default')
 	// 	.primaryPalette('blue')
@@ -34,4 +26,22 @@ app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locatio
 
 	$resourceProvider.defaults.stripTrailingSlashes = false;
 
+}]);
+
+app.run(['$rootScope', '$location', '$mdToast', 'AuthFactory', 'Routes', function($rootScope, $location, $mdToast, AuthFactory, Routes) {
+	$rootScope.$on('$locationChangeStart', function(event, next, current) {
+		for (var i in Routes) {
+			if (next.indexOf(i) != -1) {
+				if (Routes[i].requireLogin && !AuthFactory.isLoggedIn()) {
+					event.preventDefault();
+					$location.path("/sign-in");
+					$mdToast.show(
+						$mdToast.simple()
+							.content("You must sign in you access this page!")
+							.position("top right")
+					);
+				}
+			}
+		}
+	});
 }]);

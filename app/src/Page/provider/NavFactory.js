@@ -1,6 +1,6 @@
-app.factory('Nav', ['$location', function($location){
+app.factory('Nav', ['$location', 'AuthFactory', function($location, AuthFactory) {
 	var navigationItems = {
-		"default": [
+		"guest": [
 			{
 				"icon": "",
 				"text": "Home",
@@ -19,26 +19,26 @@ app.factory('Nav', ['$location', function($location){
 		],
 		"user": [
 			{
-				"icons": "",
+				"icon": "",
 				"text": "My Organizations",
 				"url": "/organizations"
 			}
 		]
 	};
-	var which = "default";
+
+	var which = function() {
+		return AuthFactory.userType();
+	};
 
 	var nav = {
 		"items": function() {
-			return navigationItems[which];
+			return navigationItems[which()];
 		},
 		"select": function(item) {
 			$location.path(item.url);
 		},
 		"selected": function(item) {
 			return $location.path() == item.url;
-		},
-		"setNav": function(newNav) {
-			which = newNave;
 		}
 	};
 
