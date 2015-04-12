@@ -44,4 +44,6 @@ app.run(['$rootScope', '$location', '$http', '$mdToast', 'Auth', 'Routes', funct
 			}
 		}
 	});
+
+	$http.defaults.headers.common.Authorization = "Token "+Auth.token();
 }]);

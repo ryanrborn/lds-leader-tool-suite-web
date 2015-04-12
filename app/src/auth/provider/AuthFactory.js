@@ -38,8 +38,16 @@
 					if (token && userData.email === user.email) {
 						defer.resolve(user);
 					} else {
-						$http.post(Constants.protocol+"://"+Constants.api_host+"/auth/", userData).success(function(data) {
+						$http({
+							method: 'POST',
+							url: Constants.protocol()+"://"+Constants.api_host()+"/auth/",
+							headers: {
+								"Authorization": undefined,
+							},
+							data: userData
+						}).success(function(data) {
 							token = data.token;
+							$http.defaults.headers.common.Authorization = 'Token '+token;
 							if (remember) {
 								localStorage.setItem('userToken', token);
 							}
@@ -62,10 +70,7 @@
 					var defer = $q.defer();
 					$http({
 						method: 'GET',
-						url: Constants.protocol+"://"+Constants.api_host+"/me/",
-						headers: {
-							"Authorization": "Token "+token
-						}
+						url: Constants.protocol()+"://"+Constants.api_host()+"/me/"
 					}).success(function(data) {
 						user = data;
 						defer.resolve(data);
@@ -76,7 +81,14 @@
 				},
 				register: function(userData) {
 					var defer = $q.defer();
-					$http.post(Constants.protocol+"://"+Constants.api_host+"/auth/create/", userData).success(function(data) {
+					$http({
+						method: 'POST',
+						url: Constants.protocol()+"://"+Constants.api_host()+"/auth/create/",
+						headers: {
+							"Authorization": undefined
+						},
+						data: userData,
+					}).success(function(data) {
 						// automatically login user
 						auth.login({"email":userData.email, "password":userData.password}).then(function(data) {
 							// success
@@ -95,7 +107,14 @@
 					if (email == undefined) {
 						defer.reject();
 					}
-					$http.post(Constants.protocol+"://"+Constants.api_host+"/auth/check/", {username:email}).success(function(data) {
+					$http({
+						method: 'POST',
+						url: Constants.protocol()+"://"+Constants.api_host()+"/auth/check/",
+						headers: {
+							"Authorization": undefined
+						},
+						data: {username:email}
+					}).success(function(data) {
 						// email found, so we fail
 						defer.reject();
 					}, function rejected(data) {
