@@ -1,4 +1,4 @@
-app.factory('Nav', ['$location', 'AuthFactory', function($location, AuthFactory) {
+app.factory('Nav', ['$location', 'Auth', function($location, Auth) {
 	var navigationItems = {
 		"guest": [
 			{
@@ -27,7 +27,7 @@ app.factory('Nav', ['$location', 'AuthFactory', function($location, AuthFactory)
 	};
 
 	var which = function() {
-		return AuthFactory.userType();
+		return Auth.userType();
 	};
 
 	var nav = {

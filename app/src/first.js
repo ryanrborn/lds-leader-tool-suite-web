@@ -2,7 +2,7 @@
 
 var app = angular.module('llts', ['ngMaterial', 'ngRoute', 'ngResource', 'ngMessages', 'Auth', 'Config']);
 
-app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', '$httpProvider', 'RoutesProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider, $httpProvider, RoutesProvider){
+app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', 'RoutesProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider, RoutesProvider){
 
 	var routes = RoutesProvider.$get().routes();
 	for (var path in routes) {
@@ -28,11 +28,11 @@ app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locatio
 
 }]);
 
-app.run(['$rootScope', '$location', '$mdToast', 'AuthFactory', 'Routes', function($rootScope, $location, $mdToast, AuthFactory, Routes) {
+app.run(['$rootScope', '$location', '$http', '$mdToast', 'Auth', 'Routes', function($rootScope, $location, $http, $mdToast, Auth, Routes) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
 		for (var i in Routes) {
 			if (next.indexOf(i) != -1) {
-				if (Routes[i].requireLogin && !AuthFactory.isLoggedIn()) {
+				if (Routes[i].requireLogin && !Auth.isLoggedIn()) {
 					event.preventDefault();
 					$location.path("/sign-in");
 					$mdToast.show(

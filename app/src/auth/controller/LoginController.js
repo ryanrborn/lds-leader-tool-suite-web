@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Auth')
-		.controller('LoginController', ['$scope', '$location', '$mdToast', 'AuthFactory', function($scope, $location, $mdToast, AuthFactory) {
+		.controller('LoginController', ['$scope', '$location', '$mdToast', 'Auth', function($scope, $location, $mdToast, Auth) {
 
 			$scope.userData = {
 				email: "",
@@ -16,9 +16,9 @@
 
 			$scope.login = function() {
 				$scope.userData.username = $scope.userData.email;
-				AuthFactory.login($scope.userData, $scope.remember).then(function(data){
-					if (AuthFactory.redirect()) {
-						return $location.path(AuthFactory.redirect());
+				Auth.login($scope.userData, $scope.remember).then(function(data){
+					if (Auth.redirect()) {
+						return $location.path(Auth.redirect());
 					}
 					$location.path('/organizations');
 				}, function(data) {

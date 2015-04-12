@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Auth')
-		.controller('RegisterController', ['$scope', '$timeout', '$location', 'AuthFactory', function($scope, $timeout, $location, AuthFactory) {
+		.controller('RegisterController', ['$scope', '$timeout', '$location', 'Auth', function($scope, $timeout, $location, Auth) {
 
 			$scope.userData = {
 				first_name: "",
@@ -17,9 +17,9 @@
 			$scope.register = function() {
 				if ($scope.registerForm.$valid) {
 					$scope.userData.username = $scope.userData.email;
-					AuthFactory.register($scope.userData).then(function(data) {
-						if (AuthFactory.redirect()) {
-							return $location.path(AuthFactory.redirect());
+					Auth.register($scope.userData).then(function(data) {
+						if (Auth.redirect()) {
+							return $location.path(Auth.redirect());
 						}
 						$location.path('/organizations');
 					});
@@ -30,7 +30,7 @@
 				$timeout.cancel($scope.timer);
 				$scope.registerForm.email.$setValidity('unique', undefined);
 				$scope.timer = $timeout(function() {
-					AuthFactory.checkEmail($scope.userData.email).then(function() {
+					Auth.checkEmail($scope.userData.email).then(function() {
 						$scope.registerForm.email.$setValidity('unique', true);
 					}, function() {
 						$scope.registerForm.email.$setValidity('unique', false);

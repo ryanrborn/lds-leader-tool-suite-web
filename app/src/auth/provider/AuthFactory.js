@@ -2,7 +2,7 @@
 	'use strict';
 
 	angular.module('Auth')
-		.factory('AuthFactory', ['$http', '$q', 'Constants', function($http, $q, Constants){
+		.factory('Auth', ['$http', '$q', 'Constants', function($http, $q, Constants){
 			var user = {};
 			var token = localStorage.getItem('userToken');
 			var redirect = false;
