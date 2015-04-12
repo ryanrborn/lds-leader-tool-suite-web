@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('llts', ['ngMaterial', 'ngRoute', 'ngResource', 'ngMessages', 'Auth', 'Config', 'Organization']);
+var app = angular.module('llts', ['ngMaterial', 'ngRoute', 'ngResource', 'ngMessages', 'Auth', 'Config', 'Page', 'Organization']);
 
 app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locationProvider', '$resourceProvider', 'RoutesProvider', function($mdThemingProvider, $mdIconProvider, $routeProvider, $locationProvider, $resourceProvider, RoutesProvider){
 

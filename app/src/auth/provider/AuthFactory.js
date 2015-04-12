@@ -4,7 +4,7 @@
 	angular.module('Auth')
 		.factory('Auth', ['$http', '$q', 'Constants', function($http, $q, Constants){
 			var user = {};
-			var token = localStorage.getItem('userToken');
+			var token = localStorage.getItem('userToken') || sessionStorage.getItem('userToken');
 			var redirect = false;
 
 			var auth = {
@@ -48,6 +48,7 @@
 						}).success(function(data) {
 							token = data.token;
 							$http.defaults.headers.common.Authorization = 'Token '+token;
+							sessionStorage.setItem('userToken', token);
 							if (remember) {
 								localStorage.setItem('userToken', token);
 							}
@@ -75,6 +76,7 @@
 						user = data;
 						defer.resolve(data);
 					}).error(function(data, status) {
+						token = null;
 						defer.reject({"data":data, "status":status});
 					});
 					return defer.promise;
