@@ -1,13 +1,19 @@
-app.controller('MainController', ['$scope', '$mdSidenav', 'Page', 'Nav', function($scope, $mdSidenav, Page, Nav){
-	$scope.page = Page;
-	$scope.nav = Nav;
+(function() {
+	'use strict';
 
-	$scope.toggleSidenav = function(which) {
-		$mdSidenav(which).toggle();
-	};
+	angular.module('Page')
+		.controller('MainController', ['$scope', '$mdSidenav', 'Page', 'Nav', function($scope, $mdSidenav, Page, Nav){
+			$scope.page = Page;
+			$scope.nav = Nav;
 
-	$scope.select = function(it) {
-		$scope.nav.select(it);
-		$mdSidenav('left').toggle();
-	};
-}]);
+			$scope.toggleSidenav = function(which) {
+				$mdSidenav(which).toggle();
+			};
+
+			$scope.select = function(it) {
+				$scope.nav.select(it);
+				$mdSidenav('left').toggle();
+			};
+		}]);
+
+})();
