@@ -30,9 +30,10 @@ app.config(['$mdThemingProvider', '$mdIconProvider', '$routeProvider', '$locatio
 
 app.run(['$rootScope', '$location', '$http', '$mdToast', 'Auth', 'Routes', function($rootScope, $location, $http, $mdToast, Auth, Routes) {
 	$rootScope.$on('$locationChangeStart', function(event, next, current) {
-		for (var i in Routes) {
+		var routes = Routes.routes();
+		for (var i in routes) {
 			if (next.indexOf(i) != -1) {
-				if (Routes[i].requireLogin && !Auth.isLoggedIn()) {
+				if (routes[i].requireLogin && !Auth.isLoggedIn()) {
 					event.preventDefault();
 					$location.path("/sign-in");
 					$mdToast.show(
@@ -44,6 +45,4 @@ app.run(['$rootScope', '$location', '$http', '$mdToast', 'Auth', 'Routes', funct
 			}
 		}
 	});
-
-	$http.defaults.headers.common.Authorization = "Token "+Auth.token();
 }]);

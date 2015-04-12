@@ -7,6 +7,12 @@
 			var token = localStorage.getItem('userToken') || sessionStorage.getItem('userToken');
 			var redirect = false;
 
+			var setToken = function(value) {
+				token = value;
+				sessionStorage.setItem('userToken', value);
+				$http.defaults.headers.common.Authorization = value;
+			};
+
 			var auth = {
 				token: function() {
 					return token;
@@ -15,6 +21,7 @@
 					return user;
 				},
 				isLoggedIn: function() {
+					console.log(token);
 					return !!token;
 				},
 				userType: function() {
@@ -46,9 +53,7 @@
 							},
 							data: userData
 						}).success(function(data) {
-							token = data.token;
-							$http.defaults.headers.common.Authorization = 'Token '+token;
-							sessionStorage.setItem('userToken', token);
+							setToken(data.token);
 							if (remember) {
 								localStorage.setItem('userToken', token);
 							}
@@ -65,18 +70,21 @@
 				},
 				logout: function() {
 					redirect = false;
-					token = null;
+					setToken("");
 				},
 				refreshUser: function() {
 					var defer = $q.defer();
 					$http({
 						method: 'GET',
-						url: Constants.protocol()+"://"+Constants.api_host()+"/me/"
+						url: Constants.protocol()+"://"+Constants.api_host()+"/me/",
+						headers: {
+							'Authorization': 'Token '+token
+						}
 					}).success(function(data) {
 						user = data;
 						defer.resolve(data);
 					}).error(function(data, status) {
-						token = null;
+						setToken("");
 						defer.reject({"data":data, "status":status});
 					});
 					return defer.promise;
