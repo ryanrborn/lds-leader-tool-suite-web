@@ -1,11 +1,23 @@
-<div layout="column" class="llts-content">
+<div layout="column">
 	<md-content>
-		<md-list>
-			<md-item class="md-1-line" ng-repeat="org in orgs">
-				<a ng-href="/organizations/{{org.id}}">
+		<md-list class="md-default-theme">
+			<md-list-item class="md-3-line" ng-repeat="org in orgs" ng-click="goto(org.id)">
+				<a ng-href="/organizations/{{org.id}}" class="md-list-item-text">
 					<h3>{{org.name}}</h3>
+					<p ng-pluralize count="org.districts.length"
+						when="{'0': 'No Districts',
+							'one': '1 District',
+							'other': '{} Districts'}">
+					</p>
+					<p ng-pluralize count="org.households.length"
+						when="{'0': 'No Households',
+							'one': '1 Household',
+							'other': '{} Households'}">
+					</p>
+					<md-divider></md-divider>
 				</a>
 			</md-list-item>
 		</md-list>
 	</md-content>
 </div>
+<md-button class="md-accent md-fab md-fab-bottom-right" ng-click="createDialog($event)">+</md-button>

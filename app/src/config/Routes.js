@@ -19,9 +19,19 @@
 					controller: 'AuthController',
 					requireLogin: false
 				},
+				"/logout": {
+					templateUrl: './src/auth/view/auth.html',
+					controller: 'LogoutController',
+					requireLogin: true
+				},
 				"/organizations": {
 					templateUrl: './src/organization/view/index.html',
-					controller: 'OrganizationController',
+					controller: 'OrganizationListController',
+					requireLogin: true
+				},
+				"/organizations/:id": {
+					templateUrl: './src/organization/view/organization.html',
+					controller: 'OrganizationDetailController',
 					requireLogin: true
 				}
 			};

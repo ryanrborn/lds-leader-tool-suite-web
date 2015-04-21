@@ -1,0 +1,16 @@
+<div layout="column">
+	<md-content>
+		<md-subheader class="md-primary"><a href="/households">Households</a></md-subheader>
+		<md-list layout-padding>
+			<md-list-item class="md-1-line" ng-repeat="household in org.households">
+				<h3><a href="/households/{{household.id}}">{{household.name}} Family</a></h3>
+			</md-list-item>
+		</md-list>
+		<md-subheader class="md-primary">Districts</md-subheader>
+		<md-list layout-padding>
+			<md-list-item class="md-1-line" ng-repeat="district in org.districts">
+				<h3><a href="/districts/{{district.id}}">{{district.name}}</a></h3>
+			</md-list-item>
+		</md-list>
+	</md-content>
+</div>

@@ -6,6 +6,14 @@ html, body {
 	padding: 0px;
 }
 
+a {
+	color: #3f51b5;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+
 /* Sidenav area */
 
 .llts-logotype {
@@ -16,6 +24,14 @@ html, body {
 .logo {
 	height: auto;
 	width: 48px;
+}
+
+md-list-item.md-2-line .md-list-item-text, md-list-item.md-2-line > .md-no-style .md-list-item-text, md-list-item.md-3-line .md-list-item-text, md-list-item.md-3-line > .md-no-style .md-list-item-text {
+	webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 16px 0;
+	text-overflow: ellipsis;
 }
 
 md-list .md-button {
@@ -32,6 +48,22 @@ md-list .md-button {
 		padding: 0px 0px 8px 0px;
 	}
 
+md-list-item.md-3-line .md-list-item-text > h3 {
+	line-height: 0.75em;
+	margin: 0 0 6px 0;
+}
+md-list-item.md-3-line .md-list-item-text > h4 {
+	font-weight: 400;
+	line-height: 0.75em;
+	margin: 10px 0 5px 0;
+}
+md-list-item.md-3-line .md-list-item-text > p {
+	line-height: 1.6em;
+	margin: 0;
+}
+md-list.md-default-theme md-list-item.md-3-line .md-list-item-text > p {
+	color: rgba(0, 0, 0, 0.54);
+}
 
 /* Utils */
 
@@ -53,6 +85,18 @@ md-list .md-button {
 	color: #f00;
 }
 
+md-list-item, md-list-item .md-list-item-inner {
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-justify-content: flex-start;
+	-ms-flex-pack: start;
+	justify-content: flex-start;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding: 0px 16px;
+}
 
 /* Typography support coming in 0.8.0 */
 

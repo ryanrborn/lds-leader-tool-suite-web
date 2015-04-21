@@ -21,7 +21,6 @@
 					return user;
 				},
 				isLoggedIn: function() {
-					console.log(token);
 					return !!token;
 				},
 				userType: function() {
@@ -70,6 +69,7 @@
 				},
 				logout: function() {
 					redirect = false;
+					localStorage.removeItem('userToken');
 					setToken("");
 				},
 				refreshUser: function() {

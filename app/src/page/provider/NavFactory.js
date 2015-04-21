@@ -26,6 +26,11 @@
 						"icon": "",
 						"text": "My Organizations",
 						"url": "/organizations"
+					},
+					{
+						"icon": "",
+						"text": "Logout",
+						"url": "/logout"
 					}
 				]
 			};
@@ -39,6 +44,9 @@
 					return navigationItems[which()];
 				},
 				"select": function(item) {
+					if (item.action) {
+
+					}
 					$location.path(item.url);
 				},
 				"selected": function(item) {

@@ -38,7 +38,7 @@ app.run(['$rootScope', '$location', '$http', '$mdToast', 'Auth', 'Routes', funct
 					$location.path("/sign-in");
 					$mdToast.show(
 						$mdToast.simple()
-							.content("You must sign in you access this page!")
+							.content("You must sign in to access this page!")
 							.position("top right")
 					);
 				}
