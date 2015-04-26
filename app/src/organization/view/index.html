@@ -1,9 +1,9 @@
 <div layout="column">
 	<md-content>
 		<md-list class="md-default-theme">
-			<md-list-item class="md-3-line" ng-repeat="org in orgs" ng-click="goto(org.id)">
-				<a ng-href="/organizations/{{org.id}}" class="md-list-item-text">
-					<h3>{{org.name}}</h3>
+			<md-list-item class="md-3-line md-with-secondary" ng-click="navigate(org.id)" ng-repeat="org in orgs">
+				<a href="javascript:void(0)" class="md-list-item-text">
+					<h3 class="md-primary">{{org.name}}</h3>
 					<p ng-pluralize count="org.districts.length"
 						when="{'0': 'No Districts',
 							'one': '1 District',
@@ -14,7 +14,11 @@
 							'one': '1 Household',
 							'other': '{} Households'}">
 					</p>
-					<md-divider></md-divider>
+					<div class="md-secondary" layout="row" layout-align="center center">
+						<md-button ng-click="editOrg($event, $index)" class="md-raised">Edit</md-button>
+						<md-button ng-click="deleteOrg($event, $index)" class="md-raised md-warn">Delete</md-button>
+					</div>
+					<md-divider ng-if="!$last"></md-divider>
 				</a>
 			</md-list-item>
 		</md-list>

@@ -2,13 +2,15 @@
 	'use strict';
 
 	angular.module('Organization')
-		.controller('OrganizationListController', ['$scope', '$resource', '$mdDialog', 'Constants', 'Page', 'OrganizationResource', function($scope, $resource, $mdDialog, Constants, Page, OrganizationResource) {
+		.controller('OrganizationListController', ['$scope', '$location', '$mdDialog', 'Constants', 'Page', 'OrganizationResource', function($scope, $location, $mdDialog, Constants, Page, OrganizationResource) {
 			Page.setTitle("My Organizations");
 
 
-			$scope.orgs = OrganizationResource.query(function() {
-				//
-			});
+			$scope.orgs = OrganizationResource.query();
+
+			$scope.navigate = function(id) {
+				$location.path('/organizations/'+id);
+			};
 
 			$scope.createDialog = function(evt) {
 				$mdDialog.show({
@@ -17,6 +19,13 @@
 					targetEvent: evt
 				}).then(function(data) {
 					$scope.orgs.push(data);
+				});
+			};
+
+			$scope.deleteOrg = function(evt, i) {
+				evt.stopPropagation();
+				$scope.orgs[i].$delete(function() {
+					$scope.orgs.splice(i, 1);
 				});
 			};
 

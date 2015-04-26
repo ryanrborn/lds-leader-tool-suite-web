@@ -25,6 +25,12 @@ a:hover {
 	height: auto;
 	width: 48px;
 }
+md-list md-divider {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+}
 
 md-list-item.md-2-line .md-list-item-text, md-list-item.md-2-line > .md-no-style .md-list-item-text, md-list-item.md-3-line .md-list-item-text, md-list-item.md-3-line > .md-no-style .md-list-item-text {
 	webkit-flex: 1;
@@ -34,7 +40,20 @@ md-list-item.md-2-line .md-list-item-text, md-list-item.md-2-line > .md-no-style
 	text-overflow: ellipsis;
 }
 
-md-list .md-button {
+md-list-item.md-with-secondary {
+	position: relative;
+}
+md-list-item.md-with-secondary.md-3-line .md-secondary {
+	top: 35px;
+}
+
+md-list-item .md-secondary-container, md-list-item .md-secondary, md-list-item .md-list-item-inner .md-secondary-container, md-list-item .md-list-item-inner .md-secondary {
+	margin-left: 16px;
+	position: absolute;
+	right: 16px;
+	top: 0;
+}
+md-list.leftNav .md-button {
 	color: inherit;
 	font-weight: 500;
 	text-align: left;

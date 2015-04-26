@@ -24,7 +24,7 @@
 				</h1>
 			</md-toolbar>
 			<md-content flex role="navigation">
-				<md-list>
+				<md-list class="leftNav">
 					<md-item ng-repeat="it in nav.items()">
 						<md-button ng-click="select(it)" ng-class="{'selected': nav.selected(it)}">
 							<md-icon md-svg-icon="{{it.icon}}" class=""></md-icon>
